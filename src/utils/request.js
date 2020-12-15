@@ -20,7 +20,12 @@ service.interceptors.request.use(config => {
 }, error => {
   Promise.reject(error)
 })
-
+// TODO 需要改造
+// 1. 登录超时处理
+// 2. 权限不足处理
+// 3. 资源不存在处理
+// 4. 服务器没有响应处理
+// 5. 响应超时处理
 service.interceptors.response.use(response => {
   /**
   * 这里可以做接口相关的拦截设置
