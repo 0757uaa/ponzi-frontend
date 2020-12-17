@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
 
+import { logoutHandler } from './errorHandler'
+
 // base setting
 // const BASE_URL = process.env.NODE_ENV === 'production'
 //   ? 'production api'
@@ -21,11 +23,9 @@ service.interceptors.request.use(config => {
   Promise.reject(error)
 })
 // TODO 需要改造
-// 1. 登录超时处理
 // 2. 权限不足处理
 // 3. 资源不存在处理
-// 4. 服务器没有响应处理
-// 5. 响应超时处理
+// 4. 服务器响应超时处理
 service.interceptors.response.use(response => {
   /**
   * 这里可以做接口相关的拦截设置
@@ -37,6 +37,13 @@ service.interceptors.response.use(response => {
       type: 'error',
       duration: 6 * 1000
     })
+  } else if (res.status === 4000) {
+    Message({
+      message: '登录失效,请先登录',
+      type: 'error',
+      duration: 6 * 1000
+    })
+    logoutHandler()
   }
   return response
 }, error => {

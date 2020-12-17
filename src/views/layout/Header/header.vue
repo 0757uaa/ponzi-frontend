@@ -25,8 +25,9 @@
 </template>
 
 <script>
-import Cookie from 'js-cookie'
 import languageTrans from '@/components/LangSelect'
+import { logoutHandler } from '@/utils/errorHandler'
+
 export default {
   data () {
     return {
@@ -47,19 +48,20 @@ export default {
     handleCommand (item) {
       switch (item) {
         case 'loginout':
-          Cookie.remove('menus')
-          Cookie.remove('permissions')
-          Cookie.remove('user')
-          Cookie.remove('role')
-          this.$store.commit('clearAllTags')
-          this.$store.commit('user/RESET_ROLE') // 清除角色
-          this.$store.commit('permiss/RM_ROUTES') // 清空routes for sidebar
-          localStorage.removeItem('pageOpenedList')
-          setTimeout(() => {
-            // 为了修复直接通过vue-router 无刷新退出 导致 Duplicate named routes definition bug
-            // 刷新是为了清空 路由源保留的路由状态
-            location.reload()
-          }, 0)
+          // Cookie.remove('menus')
+          // Cookie.remove('permissions')
+          // Cookie.remove('user')
+          // Cookie.remove('role')
+          // this.$store.commit('clearAllTags')
+          // this.$store.commit('user/RESET_ROLE') // 清除角色
+          // this.$store.commit('permiss/RM_ROUTES') // 清空routes for sidebar
+          // localStorage.removeItem('pageOpenedList')
+          // setTimeout(() => {
+          //   // 为了修复直接通过vue-router 无刷新退出 导致 Duplicate named routes definition bug
+          //   // 刷新是为了清空 路由源保留的路由状态
+          //   location.reload()
+          // }, 0)
+          logoutHandler()
           break
         case 'dashboard':
           this.$router.push({

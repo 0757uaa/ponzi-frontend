@@ -12,6 +12,8 @@ import errPage from '@/utils/404'
 import { Message } from 'element-ui'
 import Main from '@/views/Main'
 
+import { logoutHandler } from '@/utils/errorHandler'
+
 const _import = require('@/router/_import_' + process.env.NODE_ENV)
 
 const originalPush = Router.prototype.push
@@ -334,19 +336,7 @@ router.beforeEach((to, from, next) => {
       }).catch((err) => {
         if (err) {
           Message.error('网络错误，请重试')
-          setTimeout(() => {
-            Cookie.remove('user')
-            Cookie.remove('role')
-            store.commit('clearAllTags')
-            store.commit('permiss/RM_ROUTES') // 清空routes for sidebar
-            localStorage.removeItem('pageOpenedList')
-            setTimeout(() => {
-              // 为了修复直接通过vue-router 无刷新退出 导致 Duplicate named routes definition bug
-              // 刷新是为了清空 路由源保留的路由状态
-              location.reload()
-            }, 0)
-            NProgress.done()
-          }, 2000)
+          logoutHandler()
         }
       })
       /** 正式用注释这段就够了，因为后台回返给不同的角色End */
