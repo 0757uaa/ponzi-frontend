@@ -69,7 +69,7 @@ export default {
           })
           break
         case 'github':
-          window.open('https://github.com/BiYuqi/vue-element-admin')
+          window.open('https://github.com/0757uaa')
           break
         default:
       }
