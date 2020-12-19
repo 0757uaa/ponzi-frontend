@@ -6,7 +6,7 @@
           :inline="true"
           class="demo-form-inline search-form">
           <el-form-item class="btnRight">
-            <el-button type="primary" size ="mini" icon="view" @click='onAddMenu("#", "#")'>添加菜单</el-button>
+            <el-button v-check-opt="'menu:button:add'" type="primary" size ="mini" icon="view" @click='onAddMenu("#", "#")'>添加菜单</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -61,8 +61,8 @@
             header-align="center"
             label="操作">
             <template slot-scope="scope">
-              <el-button v-if="scope.row.pid === '#'" type="primary" size="mini" style="margin-left: 10px;" @click="onAddMenu(scope.row.id, scope.row.menuName)">添加子菜单</el-button>
-              <el-button v-if="scope.row.pid != '#'" type="success" size="mini" style="margin-left: 10px;" @click="onShowMenuPermission(scope.row.id)">权限设置</el-button>
+              <el-button v-check-opt="'menu:button:add_sub'" v-if="scope.row.pid === '#'" type="primary" size="mini" style="margin-left: 10px;" @click="onAddMenu(scope.row.id, scope.row.menuName)">添加子菜单</el-button>
+              <el-button v-check-opt="'menu:button:permission_set'" v-if="scope.row.pid != '#'" type="success" size="mini" style="margin-left: 10px;" @click="onShowMenuPermission(scope.row.id)">权限设置</el-button>
               <el-popconfirm
                 confirm-button-text='确定'
                 cancel-button-text='取消'
@@ -70,7 +70,7 @@
                 icon-color="red"
                 title="确定删除？"
                 @confirm="onDeleteMenu(scope.row.id)">
-                <el-button slot="reference" type="danger" size="mini" style="margin-left: 10px;">删除</el-button>
+                <el-button v-check-opt="'menu:button:delete'" slot="reference" type="danger" size="mini" style="margin-left: 10px;">删除</el-button>
               </el-popconfirm>
             </template>
           </el-table-column>

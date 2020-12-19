@@ -48,7 +48,7 @@
                 icon-color="red"
                 title="确定删除？"
                 @confirm="deleteMenu(scope.row.id)">
-                <el-button slot="reference" type="danger" size="mini" style="margin-left: 10px;">删除</el-button>
+                <el-button v-check-opt="'menu:button:permission_set:menu_permission:delete'" slot="reference" type="danger" size="mini" style="margin-left: 10px;">删除</el-button>
               </el-popconfirm>
             </template>
           </el-table-column>
@@ -75,7 +75,7 @@
 
             <el-form-item  class="text_right">
               <el-button @click="isVisible = false">取 消</el-button>
-              <el-button type="primary" @click='onSubmit("form")'>提  交</el-button>
+              <el-button v-check-opt="'menu:button:permission_set:add_permission:save'" type="primary" @click='onSubmit("form")'>提  交</el-button>
             </el-form-item>
 
           </el-form>
