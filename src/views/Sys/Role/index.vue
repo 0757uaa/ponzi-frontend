@@ -4,7 +4,7 @@
       <el-card class="box-card">
         <div slot="header" class="clearfix">
           <span>角色管理</span>
-          <el-button type="primary" size="mini" style="float: right;" @click="onAdd">添加角色</el-button>
+          <el-button v-check-opt="'role:button:add'" type="primary" size="mini" style="float: right;" @click="onAdd">添加角色</el-button>
         </div>
         <el-table
           v-loading="loading"
@@ -37,7 +37,7 @@
             header-align="center"
             align="center">
             <template slot-scope="scope">
-              <el-button type="primary" size="mini" style="margin-left: 10px;" @click="setMenuPermission(scope.row.id)">设置菜单权限</el-button>
+              <el-button v-check-opt="'role:button:set_menu_permission'" type="primary" size="mini" style="margin-left: 10px;" @click="setMenuPermission(scope.row.id)">设置菜单权限</el-button>
               <el-popconfirm
                 v-if="scope.row.disabled == false"
                 confirm-button-text='确认'
@@ -46,7 +46,7 @@
                 icon-color="red"
                 title="确认删除？"
                 @confirm="deleteRole(scope.row.id)">
-                <el-button slot="reference" type="danger" size="mini" style="margin-left: 10px;" @click="suspendDelete($event)">删除</el-button>
+                <el-button v-check-opt="'role:button:delete'" slot="reference" type="danger" size="mini" style="margin-left: 10px;" @click="suspendDelete($event)">删除</el-button>
               </el-popconfirm>
             </template>
           </el-table-column>

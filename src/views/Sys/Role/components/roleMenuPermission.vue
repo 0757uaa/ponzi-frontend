@@ -3,7 +3,7 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span>菜单权限设置</span>
-        <el-button type="primary" size="mini" style="float: right;" @click="saveSetting">保存设置</el-button>
+        <el-button v-check-opt="'role:button:save_set'" type="primary" size="mini" style="float: right;" @click="saveSetting">保存设置</el-button>
       </div>
       <div class="text item">
         <el-table

@@ -24,7 +24,7 @@
 
         <el-form-item  class="text_right">
           <el-button @click="isVisible = false">取 消</el-button>
-          <el-button type="primary" @click='onSubmit("form")'>提  交</el-button>
+          <el-button v-check-opt="'role:button:add:save'" type="primary" @click='onSubmit("form")'>提  交</el-button>
         </el-form-item>
 
       </el-form>
