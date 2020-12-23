@@ -1,4 +1,6 @@
 const path = require('path')
+const CompressionPlugin = require('compression-webpack-plugin')
+const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i
 const resolve = dir => path.join(__dirname, './', dir)
 const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 
@@ -27,7 +29,16 @@ module.exports = {
       .set('@', resolve('src'))
       .set('cps', resolve('src/components'))
       .set('assets', resolve('src/assets'))
-
+    // 打包时使用compression-webpack-plugin插件对资源进行压缩
+    config.plugin('compressionPlugin')
+      .use(new CompressionPlugin({
+        filename: '[path].gz[query]',
+        algorithm: 'gzip',
+        test: productionGzipExtensions,
+        threshold: 10240,
+        minRatio: 0.8,
+        deleteOriginalAssets: false
+      }))
     config.module
       .rule('svg')
       .exclude.add(resolve('src/assets/icons'))
